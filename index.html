@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala GK Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h5>created by hashir </h5>
+    <h1>Kerala GK Quiz</h1>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+    <div id="result" style="display: none;"></div>
+    
+
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of Kerala?",
+                options: ["Trivandrum", "Kochi", "Kozhikode", "Thrissur"],
+                answer: "Trivandrum"
+            },
+            {
+                question: "Which is the largest district in Kerala by area?",
+                options: ["Kottayam", "Idukki", "Palakkad", "Kasargod"],
+                answer: "Idukki"
+            },
+            {
+                question: "Which is the highest peak in Kerala?",
+                options: ["Anamudi", "Meeshapulimala", "Agasthyarkoodam", "Chembra Peak"],
+                answer: "Anamudi"
+            },
+            // Add more questions here...
+            {
+                question: "Which river is known as the lifeline of Kerala?",
+                options: ["Periyar", "Pamba", "Bharathapuzha", "Chaliyar"],
+                answer: "Periyar"
+            },
+            {
+                question: "What is the traditional dance form of Kerala?",
+                options: ["Kathakali", "Bharatanatyam", "Odissi", "Kuchipudi"],
+                answer: "Kathakali"
+            },
+            {
+                question: "Which is the famous festival of Kerala celebrated during the harvest season?",
+                options: ["Onam", "Pongal", "Vishu", "Navratri"],
+                answer: "Onam"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const resultElement = document.getElementById('result');
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionElement.textContent = question.question;
+            optionsElement.innerHTML = "";
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(option) {
+            const question = questions[currentQuestion];
+            if (option === question.answer) {
+                score++;
+                alert("Correct!");
+            } else {
+                alert("Incorrect!");
+            }
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            resultElement.style.display = "block";
+            resultElement.textContent = `Congratulations HASHCODE, You scored ${score}/${questions.length}`;
+            
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
